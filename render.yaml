@@ -1,0 +1,15 @@
+# Render Blueprint - optional; you can also create the service from the Dashboard.
+# See: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: content-report-ui
+    runtime: node
+    region: oregon
+
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+
+    envVars:
+      - key: MONGODB_URI
+        sync: false  # Set in Dashboard: Environment tab
