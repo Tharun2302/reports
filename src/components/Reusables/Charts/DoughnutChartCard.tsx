@@ -19,6 +19,7 @@ export interface DoughnutChartCardProps {
   customWidth?: number | null;
   showDataLabels?: boolean;
   showLegend?: boolean;
+  valueFormatter?: (value: number) => string;
   onPointClick?: (point: { name: string; value: number }) => void;
 }
 
@@ -33,6 +34,7 @@ const DoughnutChartCard = ({
   customWidth = null,
   showDataLabels = true,
   showLegend = true,
+  valueFormatter,
   onPointClick,
 }: DoughnutChartCardProps) => {
   const chartRef = useRef<HighchartsReact.RefObject>(null);
@@ -79,7 +81,10 @@ const DoughnutChartCard = ({
           dataLabels: {
             enabled: showDataLabels,
             formatter: function (this: Highcharts.Point) {
-              return `<p>${this.name}: ${this.y}</p>`;
+              const displayVal = valueFormatter
+                ? valueFormatter(this.y ?? 0)
+                : String(this.y);
+              return `<p>${this.name}: ${displayVal}</p>`;
             },
             style: {
               color: "var(--chartCard-data-label)",
@@ -119,7 +124,10 @@ const DoughnutChartCard = ({
         },
         borderRadius: 4,
         formatter: function () {
-          return `${this.key}: ${this.y}`;
+          const displayVal = valueFormatter
+            ? valueFormatter(this.y ?? 0)
+            : String(this.y);
+          return `${this.key}: ${displayVal}`;
         },
       },
       legend: {
@@ -135,6 +143,7 @@ const DoughnutChartCard = ({
       customWidth,
       showDataLabels,
       showLegend,
+      valueFormatter,
       onPointClick,
     ],
   );

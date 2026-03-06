@@ -16,20 +16,15 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  // {
-  //   label: "Clouds",
-  //   href: "/",
-  //   icon: <Cloud className={Styles.navLinkIcon} size={iconSize} />,
-  // },
-  // {
-  //   label: "Team Migration",
-  //   href: "/team-migration",
-  //   icon: <Users className={Styles.navLinkIcon} size={iconSize} />,
-  // },
   {
     label: "Dashboard",
     href: "/Dashboard",
     icon: <LayoutDashboard className={Styles.navLinkIcon} size={iconSize} />,
+  },
+  {
+    label: "Jobs",
+    href: "/Jobs",
+    icon: <FileText className={Styles.navLinkIcon} size={iconSize} />,
   },
 ];
 

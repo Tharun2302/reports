@@ -1,6 +1,7 @@
 import React from "react";
 import { Settings, Users, Clock, AlertTriangle } from "lucide-react";
 import StatCard from "@/components/Reusables/StatCard";
+import type { DashboardStats } from "@/types/dashboard";
 import styles from "./Dashboard.module.css";
 
 const CARD_ICON_SIZE = 20;
@@ -15,43 +16,48 @@ interface Card {
   href?: string | null;
 }
 
-const DashboardTopSection = () => {
+interface DashboardTopSectionProps {
+  stats: DashboardStats | null;
+  isLoading: boolean;
+}
+
+const DashboardTopSection = ({ stats, isLoading }: DashboardTopSectionProps) => {
   const cards: Card[] = [
     {
       title: "Total Jobs",
-      value: 50,
+      value: stats?.totalJobs ?? 0,
       subtitle: "Initiated Jobs",
       icon: <Settings size={CARD_ICON_SIZE} />,
       iconBgColor: "#6b7eeb",
       showArrow: true,
-      href: "#",
+      href: "/Jobs?status=ALL",
     },
     {
       title: "Completed Jobs",
-      value: 25,
+      value: stats?.completedJobs ?? 0,
       subtitle: "Completed Jobs",
       icon: <Users size={CARD_ICON_SIZE} />,
       iconBgColor: "#22c55e",
       showArrow: true,
-      href: "#",
+      href: "/Jobs?status=COMPLETED",
     },
     {
       title: "In Progress Jobs",
-      value: 15,
+      value: stats?.inProgressJobs ?? 0,
       subtitle: "Jobs Currently Running",
       icon: <Clock size={CARD_ICON_SIZE} />,
       iconBgColor: "#f59e0b",
       showArrow: true,
-      href: "#",
+      href: "/Jobs?status=IN_PROGRESS",
     },
     {
-      title: "Conflict Jobs",
-      value: 10,
-      subtitle: "Jobs Went To Conflict",
+      title: "Partially Completed Jobs",
+      value: stats?.partiallyCompletedJobs ?? 0,
+      subtitle: "Partially Completed",
       icon: <AlertTriangle size={CARD_ICON_SIZE} />,
       iconBgColor: "#ef4444",
       showArrow: true,
-      href: "#",
+      href: "/Jobs?status=PARTIALLY_COMPLETED",
     },
   ];
 
@@ -62,7 +68,7 @@ const DashboardTopSection = () => {
           <StatCard
             key={card.title}
             title={card.title}
-            value={card.value}
+            value={isLoading ? "..." : card.value}
             subtitle={card.subtitle}
             icon={card.icon}
             iconBgColor={card.iconBgColor}

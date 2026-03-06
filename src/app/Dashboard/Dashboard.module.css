@@ -39,3 +39,24 @@
     flex-direction: column;
   }
 }
+
+.loadingPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 350px;
+  width: 100%;
+  background: var(--card-bg, #fff);
+  border-radius: 16px;
+  color: var(--foreground);
+  font-size: 16px;
+}
+
+.errorMessage {
+  padding: 24px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+  text-align: center;
+}

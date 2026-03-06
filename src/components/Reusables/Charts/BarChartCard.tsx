@@ -44,18 +44,17 @@ const BarChartCard = ({
         <ResponsiveContainer width="100%" height={350}>
           <BarChart
             data={data}
-            margin={{ top: 8, right: 16, left: 0, bottom: 0 }}
+            margin={{ top: 8, right: 16, left: 0, bottom: 60 }}
           >
-            {/* <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="var(--chartCard-grid, #e5e7eb)"
-              vertical={false}
-            /> */}
             <XAxis
               dataKey="name"
-              tick={{ fill: "var(--chartCard-axis)", fontSize: 12 }}
+              tick={{ fill: "var(--chartCard-axis)", fontSize: 11 }}
               axisLine={{ stroke: "var(--chartCard-axis)" }}
               tickLine={false}
+              interval={0}
+              angle={-25}
+              textAnchor="end"
+              height={60}
             />
             <YAxis
               tick={{ fill: "var(--chartCard-axis)", fontSize: 12 }}
@@ -94,7 +93,7 @@ const BarChartCard = ({
             <Bar
               dataKey="value"
               radius={[6, 6, 0, 0]}
-              maxBarSize={80}
+              maxBarSize={60}
               label={false}
             >
               {data.map((entry, index) => (
